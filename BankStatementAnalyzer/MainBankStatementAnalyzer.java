@@ -30,6 +30,7 @@ public class MainBankStatementAnalyzer {
 		       + bankStatementProcessor.calculateTotalInMonth(Month.JANUARY));
 		System.out.println("The total salary recieved is "
 		       + bankStatementProcessor.calculateTotalForCategory("Salary"));
+		System.out.println("Transactions in February: " + bankStatementProcessor.findTransactionsInMonth(Month.FEBRUARY));
 	}
 
 }
