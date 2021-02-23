@@ -30,7 +30,21 @@ public class MainBankStatementAnalyzer {
 		       + bankStatementProcessor.calculateTotalInMonth(Month.JANUARY));
 		System.out.println("The total salary recieved is "
 		       + bankStatementProcessor.calculateTotalForCategory("Salary"));
-		System.out.println("Transactions in February: " + bankStatementProcessor.findTransactionsInMonth(Month.FEBRUARY));
+		
+		// Implement new class for transaction search
+		class BankTransactionsInFebruary implements BankTransactionFilter {
+			@Override
+			public boolean test(final BankTransaction bankTransaction) {
+				return bankTransaction.getDate().getMonth() == Month.FEBRUARY;
+			}
+		}
+		
+		final List<BankTransaction> transactions = bankStatementProcessor.findTransactions(new BankTransactionsInFebruary());
+		System.out.println("Transactions in February: " + transactions);
+
+		// Utilize lambda expression for transaction search
+		final List<BankTransaction> largeTransactions = bankStatementProcessor.findTransactions(bankTransactions -> bankTransactions.getAmount() >= 1000);
+		System.out.println("Transaction larger than 1000: " + largeTransactions);
 	}
 
 }
