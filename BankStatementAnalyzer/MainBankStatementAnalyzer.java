@@ -12,15 +12,19 @@ public class MainBankStatementAnalyzer {
 
 	private static final String RESOURCES = "./BankStatementAnalyzer/";
 
-	public void analyze(final String fileName, final BankStatementParser bankStatementParser) throws IOException {
+	public void analyze(final String fileName, 
+	                    final BankStatementParser bankStatementParser,
+						final Exporter htmlExporter) throws IOException {
 
 		final Path path = Paths.get(RESOURCES + fileName);
 		final List<String> lines = Files.readAllLines(path);
 
 		final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
 		final BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
-
 		collectSummary(bankStatementProcessor);
+
+		final SummaryStatistics summaryStatistics = bankStatementProcessor.summarizeTransactions();
+		System.out.println(htmlExporter.export(summaryStatistics));
 	}
 
 	private static void collectSummary(final BankStatementProcessor bankStatementProcessor) {

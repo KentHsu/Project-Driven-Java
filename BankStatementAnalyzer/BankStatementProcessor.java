@@ -3,6 +3,7 @@ package BankStatementAnalyzer;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.Month;
+import java.util.DoubleSummaryStatistics;
 
 
 public class BankStatementProcessor {
@@ -34,5 +35,16 @@ public class BankStatementProcessor {
 		}
 		return result;
 	}
+
+	public SummaryStatistics summarizeTransactions() {
+        final DoubleSummaryStatistics doubleSummaryStatistics = bankTransactions.stream()
+                .mapToDouble(BankTransaction::getAmount)
+                .summaryStatistics();
+
+        return new SummaryStatistics(doubleSummaryStatistics.getSum(),
+                                     doubleSummaryStatistics.getMax(),
+                                     doubleSummaryStatistics.getMin(),
+                                     doubleSummaryStatistics.getAverage());
+    }
 
 }

@@ -8,7 +8,8 @@ public class MainApplication {
 
 		final MainBankStatementAnalyzer bankStatementAnalyzer = new MainBankStatementAnalyzer();
 		final BankStatementParser bankStatementParser = new BankStatementCSVParser();
-		bankStatementAnalyzer.analyze(args[0], bankStatementParser);
+		final Exporter htmlExporter = new HtmlExporter();
+		bankStatementAnalyzer.analyze(args[0], bankStatementParser, htmlExporter);
 	}
 
 }
