@@ -24,12 +24,14 @@ public class MainBankStatementAnalyzer {
 	}
 
 	private static void collectSummary(final BankStatementProcessor bankStatementProcessor) {
-		System.out.println("The total for all transaction is "
-		       + bankStatementProcessor.calculateTotalAmount());
+
+		// Implicit API for summarize function
+		double totalAmount = bankStatementProcessor.summarizeTransactions((acc, bankTransactions) -> acc + bankTransactions.getAmount());
+		System.out.println("The total for all transaction is " + totalAmount);
+
+		// Explicit API for summarize function
 		System.out.println("The total for transaction in January is "
 		       + bankStatementProcessor.calculateTotalInMonth(Month.JANUARY));
-		System.out.println("The total salary recieved is "
-		       + bankStatementProcessor.calculateTotalForCategory("Salary"));
 		
 		// Implement new class for transaction search
 		class BankTransactionsInFebruary implements BankTransactionFilter {
