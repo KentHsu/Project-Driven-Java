@@ -1,12 +1,14 @@
 package DocumentManagementSystem;
 
 import javax.imageio.ImageIO;
+
+import static DocumentManagementSystem.Attributes.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
-import static DocumentManagementSystem.Attributes.*;
 
 
 class ImageImporter implements Importer {
