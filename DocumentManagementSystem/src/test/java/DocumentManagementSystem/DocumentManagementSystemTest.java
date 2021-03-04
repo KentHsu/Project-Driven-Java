@@ -1,6 +1,7 @@
 package DocumentManagementSystem;
 
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -13,8 +14,8 @@ public class DocumentManagementSystemTest {
             "src" + File.separator + "test" + File.separator + "resources" + File.separator;
     private static final String IMAGE = RESOURCES + "test.jpg";
     private static final String LETTER = RESOURCES + "patient.letter";
-    private static final String REPORT = RESOURCES + "test.report";
-    private static final String INVOICE = RESOURCES + "test.invoice";
+    private static final String REPORT = RESOURCES + "patient.report";
+    private static final String INVOICE = RESOURCES + "patient.invoice";
 
     private MainApplication mainApplication = new MainApplication();
     
@@ -61,7 +62,7 @@ public class DocumentManagementSystemTest {
         final Document document = mainApplication.contents().get(0);
         assertAttributeEquals(document, TYPE, "INVOICE");
         assertAttributeEquals(document, PATIENT, "Joe Bloggs");
-        //assertAttributeEquals(document, AMOUNT, "$100");
+        assertAttributeEquals(document, AMOUNT, "$100");
     }
 
     private void assertAttributeEquals(

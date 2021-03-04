@@ -15,6 +15,8 @@ public class MainApplication {
 	public MainApplication() {
 		extensionToImporter.put("jpg", new ImageImporter());
         extensionToImporter.put("letter", new LetterImporter());
+        extensionToImporter.put("report", new ReportImporter());
+        extensionToImporter.put("invoice", new InvoiceImporter());
 	}
 
 	public void importFile(String path) throws IOException {

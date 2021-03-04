@@ -1,6 +1,9 @@
-DocumentManagementSystem/MainApplication.class
-DocumentManagementSystem/Document.class
+DocumentManagementSystem/InvoiceImporter.class
 DocumentManagementSystem/Attributes.class
+DocumentManagementSystem/ReportImporter.class
 DocumentManagementSystem/ImageImporter.class
 DocumentManagementSystem/LetterImporter.class
+DocumentManagementSystem/MainApplication.class
+DocumentManagementSystem/TextFile.class
+DocumentManagementSystem/Document.class
 DocumentManagementSystem/Importer.class
