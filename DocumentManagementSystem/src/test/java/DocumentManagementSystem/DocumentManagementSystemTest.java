@@ -1,12 +1,14 @@
 package DocumentManagementSystem;
 
 import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import static DocumentManagementSystem.Attributes.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 
 public class DocumentManagementSystemTest {
 
@@ -48,12 +50,7 @@ public class DocumentManagementSystemTest {
     public void importReportAttributes() throws IOException {
         mainApplication.importFile(REPORT);
         final Document document = mainApplication.contents().get(0);
-        assertAttributeEquals(document, TYPE, "REPORT");
-        assertAttributeEquals(document, PATIENT, "Joe Bloggs");
-        assertAttributeEquals(document, BODY,
-            "On 5th January 2017 I examined Joe's teeth.\n" +
-            "We discussed his switch from drinking Coke to Diet Coke.\n" +
-            "No new problems were noted with his teeth.");
+        assertIsReport(document);
     }
 
     @Test
@@ -65,6 +62,25 @@ public class DocumentManagementSystemTest {
         assertAttributeEquals(document, AMOUNT, "$100");
     }
 
+    @Test
+    public void ableToSearchFileByAttributes() throws IOException {
+        mainApplication.importFile(LETTER);
+        mainApplication.importFile(REPORT);
+        mainApplication.importFile(IMAGE);
+        
+        final List<Document> documents = mainApplication.search("patient:Joe,body:Diet Coke");
+        assertThat(documents, hasSize(1));
+        assertIsReport(documents.get(0));
+    }
+
+    private void assertIsReport(final Document document) {
+        assertAttributeEquals(document, TYPE, "REPORT");
+        assertAttributeEquals(document, PATIENT, "Joe Bloggs");
+        assertAttributeEquals(document, BODY,
+            "On 5th January 2017 I examined Joe's teeth.\n" +
+            "We discussed his switch from drinking Coke to Diet Coke.\n" +
+            "No new problems were noted with his teeth.");
+    }
     private void assertAttributeEquals(
         final Document document,
         final String attributeName,

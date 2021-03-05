@@ -3,6 +3,7 @@ DocumentManagementSystem/Attributes.class
 DocumentManagementSystem/ReportImporter.class
 DocumentManagementSystem/ImageImporter.class
 DocumentManagementSystem/LetterImporter.class
+DocumentManagementSystem/Query.class
 DocumentManagementSystem/MainApplication.class
 DocumentManagementSystem/TextFile.class
 DocumentManagementSystem/Document.class

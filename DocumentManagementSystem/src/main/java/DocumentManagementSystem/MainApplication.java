@@ -3,6 +3,8 @@ package DocumentManagementSystem;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static java.util.Collections.unmodifiableList;
 
 
@@ -34,4 +36,9 @@ public class MainApplication {
 		return documentsView;
 	}
 
+    public List<Document> search(final String query) {
+        return documents.stream()
+                        .filter(Query.parse(query))
+                        .collect(Collectors.toList());
+    }
 }
