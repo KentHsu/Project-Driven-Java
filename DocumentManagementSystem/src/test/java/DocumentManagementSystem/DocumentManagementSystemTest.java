@@ -2,7 +2,7 @@ package DocumentManagementSystem;
 
 import org.junit.Test;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static DocumentManagementSystem.Attributes.*;
@@ -22,7 +22,7 @@ public class DocumentManagementSystemTest {
     private MainApplication mainApplication = new MainApplication();
     
     @Test
-    public void importImagaAttributes() throws IOException {
+    public void importImagaAttributes() throws Exception {
         mainApplication.importFile(IMAGE);
         final Document document = mainApplication.contents().get(0);
         assertAttributeEquals(document, TYPE, "IMAGE");
@@ -31,7 +31,7 @@ public class DocumentManagementSystemTest {
     }
 
     @Test
-    public void importLetterAttributes() throws IOException {
+    public void importLetterAttributes() throws Exception {
         mainApplication.importFile(LETTER);
         final Document document = mainApplication.contents().get(0);
         assertAttributeEquals(document, TYPE, "LETTER");
@@ -47,14 +47,14 @@ public class DocumentManagementSystemTest {
     }
 
     @Test
-    public void importReportAttributes() throws IOException {
+    public void importReportAttributes() throws Exception {
         mainApplication.importFile(REPORT);
         final Document document = mainApplication.contents().get(0);
         assertIsReport(document);
     }
 
     @Test
-    public void importInvoiceAttributes() throws IOException {
+    public void importInvoiceAttributes() throws Exception {
         mainApplication.importFile(INVOICE);
         final Document document = mainApplication.contents().get(0);
         assertAttributeEquals(document, TYPE, "INVOICE");
@@ -63,7 +63,7 @@ public class DocumentManagementSystemTest {
     }
 
     @Test
-    public void ableToSearchFileByAttributes() throws IOException {
+    public void ableToSearchFileByAttributes() throws Exception {
         mainApplication.importFile(LETTER);
         mainApplication.importFile(REPORT);
         mainApplication.importFile(IMAGE);
@@ -71,6 +71,16 @@ public class DocumentManagementSystemTest {
         final List<Document> documents = mainApplication.search("patient:Joe,body:Diet Coke");
         assertThat(documents, hasSize(1));
         assertIsReport(documents.get(0));
+    }
+
+    @Test(expected=FileNotFoundException.class)
+    public void notImportMissFile() throws Exception {
+        mainApplication.importFile("notExist.txt");
+    }
+
+    @Test(expected=UnknownFileTypeException.class)
+    public void notImportUnknownFile() throws Exception {
+        mainApplication.importFile(RESOURCES + "unknown.txt");
     }
 
     private void assertIsReport(final Document document) {

@@ -5,6 +5,7 @@ DocumentManagementSystem/ImageImporter.class
 DocumentManagementSystem/LetterImporter.class
 DocumentManagementSystem/Query.class
 DocumentManagementSystem/MainApplication.class
+DocumentManagementSystem/UnknownFileTypeException.class
 DocumentManagementSystem/TextFile.class
 DocumentManagementSystem/Document.class
 DocumentManagementSystem/Importer.class

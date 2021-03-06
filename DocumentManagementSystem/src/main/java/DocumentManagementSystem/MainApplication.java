@@ -2,6 +2,7 @@ package DocumentManagementSystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,23 @@ public class MainApplication {
 
 	public void importFile(String path) throws IOException {
 		final File file = new File(path);
-		final int seperateIndex = path.lastIndexOf('.');
-		if (seperateIndex != -1) {
-			final String extension = path.substring(seperateIndex + 1);
+        if (!file.exists()) {
+            throw new FileNotFoundException(path);
+        }
+
+		final int separateIndex = path.lastIndexOf('.');
+		if (separateIndex != -1 || separateIndex == path.length()) {
+			final String extension = path.substring(separateIndex + 1);
 			final Importer importer = extensionToImporter.get(extension);
+            if (importer == null) {
+                throw new UnknownFileTypeException("No file importer: " + path);
+            }
+
 			final Document document = importer.importFile(file);
 			documents.add(document);
-		}
+		} else {
+            throw new UnknownFileTypeException("No extension found for file " + path);
+        }
 	}
 
 	public List<Document> contents() {
