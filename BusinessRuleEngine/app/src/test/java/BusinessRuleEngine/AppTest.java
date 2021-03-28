@@ -7,8 +7,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test public void NoRulesInitially() {
+        final RuleEngine businessRuleEngine = new RuleEngine();
+        assertEquals(0, businessRuleEngine.count());
+    }
+
+    @Test public void AddTwoActions() {
+        final RuleEngine businessRuleEngine = new RuleEngine();
+        businessRuleEngine.addAction(() -> {});
+        businessRuleEngine.addAction(() -> {});
+        assertEquals(2, businessRuleEngine.count());
     }
 }
