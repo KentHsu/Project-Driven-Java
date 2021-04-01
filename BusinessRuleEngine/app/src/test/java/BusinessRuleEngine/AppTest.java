@@ -5,6 +5,8 @@ package BusinessRuleEngine;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 
 public class AppTest {
     @Test public void NoRulesInitially() {
@@ -17,5 +19,15 @@ public class AppTest {
         businessRuleEngine.addAction(() -> {});
         businessRuleEngine.addAction(() -> {});
         assertEquals(2, businessRuleEngine.count());
+    }
+
+    @Test public void ExecuteOneAciton() {
+        final RuleEngine businessRuleEngine = new RuleEngine();
+        final Action mockAction = mock(Action.class);
+
+        businessRuleEngine.addAction(mockAction);
+        businessRuleEngine.run();
+
+        verify(mockAction).execute();
     }
 }

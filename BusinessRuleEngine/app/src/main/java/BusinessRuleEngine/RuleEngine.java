@@ -22,6 +22,6 @@ public class RuleEngine {
     }
 
     public void run() {
-        throw new UnsupportedOperationException();
+        this.actions.forEach(Action::execute);
     }
 }
