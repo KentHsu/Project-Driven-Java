@@ -1,6 +1,5 @@
 package BusinessRuleEngine;
 
-import java.lang.UnsupportedOperationException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,9 +7,11 @@ import java.util.ArrayList;
 public class RuleEngine {
 
     private final List<Action> actions;
+    private final Facts facts;
 
-    public RuleEngine() {
+    public RuleEngine(final Facts facts) {
         this.actions = new ArrayList<>();
+        this.facts = facts;
     }
 
     public void addAction(final Action action) {
@@ -22,6 +23,6 @@ public class RuleEngine {
     }
 
     public void run() {
-        this.actions.forEach(Action::execute);
+        this.actions.forEach(action -> action.execute(facts));
     }
 }

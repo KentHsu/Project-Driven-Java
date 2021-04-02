@@ -9,25 +9,15 @@ import static org.mockito.Mockito.*;
 
 
 public class AppTest {
-    @Test public void NoRulesInitially() {
-        final RuleEngine businessRuleEngine = new RuleEngine();
-        assertEquals(0, businessRuleEngine.count());
-    }
 
-    @Test public void AddTwoActions() {
-        final RuleEngine businessRuleEngine = new RuleEngine();
-        businessRuleEngine.addAction(() -> {});
-        businessRuleEngine.addAction(() -> {});
-        assertEquals(2, businessRuleEngine.count());
-    }
-
-    @Test public void ExecuteOneAciton() {
-        final RuleEngine businessRuleEngine = new RuleEngine();
+    @Test
+    public void executeAnActionWithFacts() {
         final Action mockAction = mock(Action.class);
-
+        final Facts mockFacts = mock(Facts.class);
+        final RuleEngine businessRuleEngine = new RuleEngine(mockFacts);
         businessRuleEngine.addAction(mockAction);
         businessRuleEngine.run();
 
-        verify(mockAction).execute();
+        verify(mockAction).execute(mockFacts);
     }
 }
